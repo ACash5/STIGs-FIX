@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script ensures that the maximum size of the Windows Application event log is at least 32768 KB (32 MB).
+    Password hints must be disabled to prevent revealing information that could assist in password guessing or social engineering.
 
 .NOTES
     Author          : Audie Williams
