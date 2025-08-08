@@ -1,7 +1,7 @@
 <<#
 .SYNOPSIS
-    This PowerShell script ensures that the maximum size of the Windows Application event log is at least 32768 KB (32 MB).
-
+    This setting prevents unauthorized use of the camera from the lock screen, reducing the risk of privacy violations or information leakage.
+    
 .NOTES
     Author          : Audie Williams
     LinkedIn        : www.linkedin.com/in/audiewilliams
