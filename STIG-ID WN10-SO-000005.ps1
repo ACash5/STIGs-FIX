@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
-    This PowerShell script ensures that the maximum size of the Windows Application event log is at least 32768 KB (32 MB).
-
+   If the computer enters sleep mode while on battery, it must require a password on wakeup.
+   
 .NOTES
     Author          : Audie Williams
     LinkedIn        : www.linkedin.com/in/audiewilliams
