@@ -1,6 +1,7 @@
 <#
 .SYNOPSIS
-    This PowerShell script ensures that the maximum size of the Windows Application event log is at least 32768 KB (32 MB).
+Windows 10 must be configured to prevent users from sharing local drives with Remote Desktop Session Hosts.
+This is a security measure to prevent data leakage via Remote Desktop Protocol (RDP) sessions.
 
 .NOTES
     Author          : Audie Williams
