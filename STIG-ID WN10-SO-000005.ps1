@@ -22,7 +22,7 @@
 .USAGE
     Put any usage instructions here.
     Example syntax:
-    PS C:\> .\__remediation_template(STIG-ID-WN10-CC-000030).ps1 
+    PS C:\> .\__remediation_template(STIG-ID-WN10-SO-000005).ps1 
 #>
 # Fix for WN10-SO-000005 - Require password on wake after sleep (on battery)
 
@@ -39,5 +39,5 @@ powercfg /SETACTIVE SCHEME_CURRENT
 Write-Output "WN10-SO-000005 fix applied: Password required on wake from sleep (on battery)."
 #
 #Verify the Setting
-#powercfg /QUERY SCHEME_CURRENT $subgroupGuid $settingGuid
+#powercfg /QUERY SCHEME_CURRENT 
 #The Current AC/DC Power Setting Index should show 0x00000001
