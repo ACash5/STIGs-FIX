@@ -24,7 +24,18 @@
     Example syntax:
     PS C:\> .\__remediation_template(STIG-ID-WN10-CC-000030).ps1 
 #>
+# Fix for WN10-CC-000030 - Disable drive redirection in Remote Desktop sessions
 
 $registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services"
 $valueName = "fDisableCdm"
 $valueData = 1
+
+# Create the registry path if it does not exist
+if (-not (Test-Path $registryPath)) {
+    New-Item -Path $registryPath -Force | Out-Null
+}
+
+# Set the registry value
+New-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -PropertyType DWord -Force
+
+Write-Output "WN10-CC-000030 fix applied: Drive redirection disabled in RDP sessions."
