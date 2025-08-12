@@ -26,9 +26,16 @@
 #>
 
 # YOUR CODE GOES HERE$path = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application"
-$name = "MaxSize"
-$value = 32768
+# WN10-AU-000500 — Set Application log max size to 32,768 KB (or higher)
 
-if (!(Test-Path $path)) { New-Item -Path $path -Force | Out-Null }
-$current = (Get-ItemProperty -Path $path -Name $name -ErrorAction SilentlyContinue).$name
-if ($null -eq $current -or $current -lt $value) { Set-ItemProperty -Path $path -Name $name -Value $value -Type DWord }
+$regPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application"
+New-Item -Path $regPath -Force | Out-Null
+
+# 32768 KB (0x00008000). Increase if you prefer larger logs.
+New-ItemProperty -Path $regPath -Name "MaxSize" -PropertyType DWord -Value 32768 -Force | Out-Null
+
+# Optional: force policy refresh
+gpupdate /target:computer /force | Out-Null
+
+Write-Host "WN10-AU-000500 applied: Application log max size set to 32,768 KB."
+
