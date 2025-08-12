@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Password hints must be disabled to prevent revealing information that could assist in password guessing or social engineering.
+    The Allow Telemetry setting must be configured to Basic (1) or Security (0).
 
 .NOTES
     Author          : Audie Williams
@@ -24,23 +24,16 @@
     Example syntax:
     PS C:\> .\__remediation_template(STIG-ID-WN10-CC-000205).ps1 
 #>
-# Fix for WN10-CC-000205 - Disable password hints
+# WN10-CC-000205 - Ensure Telemetry is not set to Full
 
-$registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System"
-$valueName = "NoLocalPasswordHint"
-$valueData = 1
-
-# Create the registry path if it doesn't exist
-if (-not (Test-Path $registryPath)) {
-    New-Item -Path $registryPath -Force | Out-Null
+$regPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
 }
 
-# Apply the setting
-New-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -PropertyType DWord -Force
+# Set telemetry to Basic (1) for broad compatibility
+# Use 0 if you're on Enterprise/Education and want Security only
+New-ItemProperty -Path $regPath -Name "AllowTelemetry" -Value 1 -PropertyType DWord -Force | Out-Null
 
-Write-Output "WN10-CC-000205 fix applied: Password hints are now disabled."
-<#
-Verify the Value
-Get-ItemProperty -Path $registryPath -Name $valueName
-If you get NoLocalPasswordHint : 1, you're compliant.
-#>
+Write-Host "WN10-CC-000205 applied: Telemetry set to Basic (not Full)."
+
